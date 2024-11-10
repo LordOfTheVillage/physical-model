@@ -1,0 +1,9 @@
+import { POSSIBLE_DIRECTIONS } from "./possible-direction.js"
+
+export const FORWARD_DIRECTIONS = [
+  POSSIBLE_DIRECTIONS.forward,
+  POSSIBLE_DIRECTIONS.up,
+  POSSIBLE_DIRECTIONS.down,
+  POSSIBLE_DIRECTIONS.up45,
+  POSSIBLE_DIRECTIONS.down45,
+]
