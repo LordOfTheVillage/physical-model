@@ -3,7 +3,7 @@ import {
   TPossibleDirection,
 } from "../constants/possible-direction"
 import { Position } from "../types/position.type"
-import { getRandomDirection } from "./direction"
+import { getRandomDirection } from "./get-random-direction"
 
 export function simulateParticleMotion(
   length: number,
@@ -16,6 +16,7 @@ export function simulateParticleMotion(
 
   for (let i = 1; i <= length; i++) {
     const direction = getRandomDirection(directions)
+    let newX = position.x
     let newY = position.y
 
     switch (direction) {
@@ -25,16 +26,27 @@ export function simulateParticleMotion(
       case POSSIBLE_DIRECTIONS.down:
         newY += 1
         break
-      case POSSIBLE_DIRECTIONS.up45:
+      case POSSIBLE_DIRECTIONS.upRight:
         newY -= 0.5
-        position.x += 1
+        newX += 1
         break
-      case POSSIBLE_DIRECTIONS.down45:
+      case POSSIBLE_DIRECTIONS.downRight:
         newY += 0.5
-        position.x += 1
+        newX += 1
+        break
+      case POSSIBLE_DIRECTIONS.left:
+        newX -= 1
+        break
+      case POSSIBLE_DIRECTIONS.upLeft:
+        newY -= 0.5
+        newX -= 1
+        break
+      case POSSIBLE_DIRECTIONS.downLeft:
+        newY += 0.5
+        newX -= 1
         break
       default:
-        position.x += 1
+        newX += 1
     }
 
     if (newY < upperLimit) {
@@ -44,8 +56,13 @@ export function simulateParticleMotion(
       newY = lowerLimit - 1
     }
 
-    position = { x: position.x, y: newY }
+    if (newX < 0) {
+      newX = 1
+    }
+
+    position = { x: newX, y: newY }
     path.push(position)
   }
+
   return path
 }
