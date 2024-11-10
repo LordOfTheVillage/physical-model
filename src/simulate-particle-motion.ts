@@ -2,6 +2,7 @@ import {
   POSSIBLE_DIRECTIONS,
   TPossibleDirection,
 } from "../constants/possible-direction"
+import { Position } from "../types/position.type"
 import { getRandomDirection } from "./direction"
 
 export function simulateParticleMotion(
@@ -9,7 +10,7 @@ export function simulateParticleMotion(
   upperLimit: number,
   lowerLimit: number,
   directions: Array<TPossibleDirection>
-) {
+): Array<Position> {
   let position = { x: 0, y: (upperLimit + lowerLimit) / 2 }
   const path = [position]
 
